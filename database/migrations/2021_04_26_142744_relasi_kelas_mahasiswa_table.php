@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class TambahKolomDitabelMahasiswa extends Migration
+class RelasiKelasMahasiswaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,9 @@ class TambahKolomDitabelMahasiswa extends Migration
     public function up()
     {
         Schema::table('mahasiswa', function (Blueprint $table) {
-            $table->string('Email')->after('No_Handphone')->nullable();
-            $table->date('Tanggal_Lahir')->after('Email')->nullable();
+            $table->dropColumn('kelas'); //menghapus kolom kelas
+            $table->unsignedBigInteger('kelas_id')->nullable();  //menambahkan kolom kelas_id
+            $table->foreign('kelas_id')->references('id')->on('kelas');  //menambahkan foreign key di kolom kelas_id
         });
     }
 
@@ -27,10 +28,8 @@ class TambahKolomDitabelMahasiswa extends Migration
     public function down()
     {
         Schema::table('mahasiswa', function (Blueprint $table) {
-            $table->dropColumn('Email');
-            $table->dropColumn('Tanggal_Lahir');
+            $table->String('kelas'); 
+            $table->dropForeign('kelas_id'); 
         });
     }
 }
-
-

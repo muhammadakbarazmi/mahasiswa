@@ -40,21 +40,24 @@
         <tr>
             <td>{{ $Mahasiswa->Nim }}</td>
             <td>{{ $Mahasiswa->Nama }}</td>
-            <td>{{ $Mahasiswa->Kelas }}</td>
+            <td>{{ $Mahasiswa->kelas->nama_kelas }}</td>
             <td>{{ $Mahasiswa->Jurusan }}</td>
             <td>{{ $Mahasiswa->No_Handphone }}</td>
             <td>{{ $Mahasiswa->Email }}</td>
             <td>{{ $Mahasiswa->Tanggal_Lahir }}</td>
-            <td>
-                <form action="{{ route('mahasiswas.destroy',$Mahasiswa->Nim) }}" method="POST">
-                    <a class="btn btn-info" href="{{ route('mahasiswas.show',$Mahasiswa->Nim) }}">Show</a>
-                    <a class="btn btn-primary" href="{{ route('mahasiswas.edit',$Mahasiswa->Nim) }}">Edit</a>
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                </form>
+            <td><form action="{{ route('mahasiswas.destroy',$Mahasiswa->Nim) }}" method="POST">
+            <a class="btn btn-info" href="{{ route('mahasiswas.show',$Mahasiswa->Nim) }}">Show</a>
+            <a class="btn btn-primary" href="{{ route('mahasiswas.edit',$Mahasiswa->Nim) }}">Edit</a>
+                    
+            
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-danger">Delete</button>
+            <br><br>
+            <a class="btn btn-warning" href="{{ route('mahasiswa.nilai',$Mahasiswa->Nim) }}">Nilai</a>
+            </form>
             </td>
-        </tr>
+    </tr>
     @endforeach
     </table>
         {{ $mahasiswas->links() }}
